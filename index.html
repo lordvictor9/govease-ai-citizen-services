@@ -62,7 +62,7 @@
     .count-badge { display: inline-grid; min-width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--teal); color: white; font-size: 10px; }
     .menu-button { display: none; border: 0; background: transparent; color: var(--navy); padding: 7px; }
 
-    .hero { --pointer-x: 72%; --pointer-y: 35%; position: relative; overflow: hidden; padding: 56px 0 52px; background: radial-gradient(ellipse 42rem 35rem at var(--pointer-x) var(--pointer-y), rgba(255,208,142,.22), transparent 68%), linear-gradient(116deg, #113754 0%, #116b68 58%, #bf753c 120%); }
+    .hero { --pointer-x: 72%; --pointer-y: 35%; position: relative; overflow: hidden; padding: 56px 0 52px; background: url("india-inspired-background.svg") right 3% center / auto 120% no-repeat, radial-gradient(ellipse 42rem 35rem at var(--pointer-x) var(--pointer-y), rgba(255,208,142,.22), transparent 68%), linear-gradient(116deg, #113754 0%, #116b68 58%, #bf753c 120%); }
     .hero:before, .hero:after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
     .hero:before { width: 500px; height: 500px; right: -170px; top: -230px; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 0 0 46px rgba(255,255,255,.035), 0 0 0 93px rgba(255,255,255,.025); transform: translate3d(var(--pointer-shift-x, 0px), calc(var(--pointer-shift-y, 0px) + var(--scroll-shift, 0px)), 0); transition: transform .4s ease-out; }
     .hero:after { width: 360px; height: 360px; left: -220px; bottom: -245px; border: 1px solid rgba(255,193,133,.28); box-shadow: 0 0 0 40px rgba(255,193,133,.045); transform: translate3d(var(--pointer-shift-x-reverse, 0px), calc(var(--pointer-shift-y-reverse, 0px) - var(--scroll-shift, 0px)), 0); transition: transform .55s ease-out; }
@@ -337,6 +337,7 @@
       .desk-link .icon { width: 18px; height: 18px; }
       .lang-select { max-width: 91px; height: 37px; padding: 0 5px; font-size: 10px; }
       .hero { padding: 48px 0 42px; }
+      .hero { background-position: right -310px bottom 0, center, center; background-size: auto 78%, auto, auto; }
       .hero-grid { grid-template-columns: 1fr; gap: 27px; }
       .hero h1 { font-size: clamp(38px, 11vw, 52px); letter-spacing: -1.7px; }
       .hero-copy { font-size: 14px; }
