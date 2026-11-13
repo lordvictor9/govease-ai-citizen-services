@@ -131,10 +131,22 @@
     .office-card p { margin: 0; color: #c4d7d7; font-size: 10px; }
     .office-meta { display: flex; justify-content: space-between; gap: 8px; margin: 12px 0 13px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.13); color: #e4eeee; font-size: 10px; }
     .office-meta strong { color: white; }
+    .queue-meter { height: 5px; overflow: hidden; margin-top: -6px; border-radius: 99px; background: rgba(255,255,255,.16); }
+    .queue-meter span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #8dd7ad, #ffc875); transition: width .35s ease; }
     .office-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
     .office-actions a, .office-actions button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border: 1px solid rgba(255,255,255,.23); border-radius: 9px; background: rgba(255,255,255,.1); color: white; font-size: 9px; font-weight: 800; text-decoration: none; }
     .office-actions a:hover, .office-actions button:hover { background: rgba(255,255,255,.2); }
+    .availability-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 15px; }
+    .availability-tools label { display: flex; align-items: center; gap: 8px; min-width: min(330px, 100%); padding: 0 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 11px; background: rgba(255,255,255,.09); color: #e4eeee; }
+    .availability-tools input { width: 100%; min-height: 39px; border: 0; outline: 0; background: transparent; color: white; font: inherit; font-size: 11px; }
+    .availability-tools input::placeholder { color: #bfd2d2; }
+    .availability-tools .button { min-height: 39px; border-color: rgba(255,255,255,.23); background: rgba(255,255,255,.1); color: white; }
+    .availability-tools .button:hover { background: rgba(255,255,255,.2); }
+    .office-empty { grid-column: 1/-1; padding: 22px; border: 1px dashed rgba(255,255,255,.35); border-radius: 14px; color: #d6e5e3; font-size: 12px; text-align: center; }
+    .office-card .sample-label { display: inline-block; margin-top: 8px; color: #f5d9b4; font-size: 9px; font-weight: 800; letter-spacing: .2px; }
     .availability-note { max-width: 830px; margin: 15px 0 0; color: #b6cecd; font-size: 9px; line-height: 1.55; }
+    .source-note { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin-top: 11px; color: #c4d7d7; font-size: 9px; }
+    .source-note a { color: #ffe0b4; font-weight: 800; text-underline-offset: 2px; }
     .sos-fab { position: fixed; z-index: 45; right: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 8px; min-height: 49px; padding: 0 16px; border: 0; border-radius: 99px; background: #c23e3e; color: white; box-shadow: 0 10px 30px rgba(103,25,25,.3); font-size: 11px; font-weight: 900; }
     .sos-fab:hover { background: #a92d32; transform: translateY(-2px); }
     .sos-modal { border-top: 5px solid #c23e3e; }
@@ -198,7 +210,9 @@
     .close-detail { height: 34px; width: 34px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid var(--line); border-radius: 10px; background: white; color: #667982; }
     .detail-body { display: grid; grid-template-columns: 1.05fr .95fr; gap: 22px; padding: 22px 24px 24px; }
     .step-guide { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 13px 24px; background: #f0f6f2; border-bottom: 1px solid #e0e9e4; }
-    .guided-step { display: flex; align-items: center; gap: 8px; color: #587079; font-size: 9px; font-weight: 800; }
+    .stage-detail { margin: 0; padding: 11px 24px; border-bottom: 1px solid #e0e9e4; background: #fbfdfb; color: #61777c; font-size: 10px; line-height: 1.5; }
+    .guided-step { display: flex; align-items: center; gap: 8px; min-height: 42px; padding: 6px 8px; border: 1px solid transparent; border-radius: 11px; background: transparent; color: #587079; font: inherit; font-size: 9px; font-weight: 800; text-align: left; cursor: pointer; transition: background .18s, border-color .18s, transform .18s; }
+    .guided-step:hover, .guided-step[aria-pressed="true"] { border-color: #cfe3d8; background: white; transform: translateY(-1px); }
     .guided-step b { width: 25px; height: 25px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 9px; background: #dcece3; color: var(--teal-dark); font-size: 9px; }
     .detail-box { padding: 17px; border: 1px solid #e0e9e4; border-radius: 15px; background: white; }
     .detail-box h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 13px; color: var(--navy); font-size: 13px; }
@@ -210,6 +224,17 @@
     .detail-steps { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; counter-reset: steps; }
     .detail-steps li { display: flex; gap: 10px; color: #566f78; font-size: 11px; line-height: 1.5; counter-increment: steps; }
     .detail-steps li:before { content: counter(steps, decimal-leading-zero); flex: 0 0 auto; color: #bd7338; font-size: 10px; font-weight: 900; }
+    .detail-steps li { padding: 7px 8px; margin: -7px -8px; border-radius: 9px; transition: background .18s; }
+    .detail-steps li.is-active { background: #eff7f2; }
+    .office-advice { margin: 14px 0 0; padding: 12px; border: 1px solid #d9e9df; border-radius: 12px; background: #f2f8f3; }
+    .office-advice.is-active { border-color: #56a98c; box-shadow: 0 0 0 3px rgba(55,143,117,.1); }
+    .office-advice strong { display: block; color: var(--navy); font-size: 11px; }
+    .office-advice p { margin: 5px 0 9px; color: #5d7478; font-size: 10px; line-height: 1.5; }
+    .office-advice .button { min-height: 34px; }
+    .audio-guide { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 13px; padding: 11px; border-radius: 12px; background: #eef5f5; }
+    .audio-guide p { flex: 1 1 200px; margin: 0; color: #5d7478; font-size: 10px; line-height: 1.45; }
+    .audio-guide-status { flex-basis: 100%; min-height: 12px; color: var(--teal-dark); font-size: 9px; }
+    .detail-callout a { color: #57442e; font-weight: 850; }
     .detail-callout { margin-top: 12px; padding: 11px 12px; border-radius: 11px; background: #fff4e6; color: #765d3e; font-size: 10px; line-height: 1.5; }
     .detail-callout strong { color: #57442e; }
     .detail-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
@@ -493,10 +518,16 @@
       <div class="wrap availability-inner">
         <div class="availability-head">
           <div><div class="section-kicker" data-i18n="availabilityKicker">Local service preview</div><h2 data-i18n="availabilityTitle">Officer & service desk availability</h2><p class="section-intro" data-i18n="availabilityIntro">Choose a desk to see the demo status and open directions in Maps.</p></div>
-          <div class="demo-feed"><span class="pulse"></span><span><span data-i18n="statusDemo">Demo simulation · updates</span> <span id="status-time">--:--</span></span></div>
+          <div class="demo-feed"><span class="pulse"></span><span><span data-i18n="statusDemo">Sample status · last refreshed</span> <span id="status-time">--:--</span></span></div>
+        </div>
+        <div class="availability-tools">
+          <label for="office-filter"><svg class="icon sm"><use href="#i-search"/></svg><input id="office-filter" type="search" placeholder="Find a desk or service…" aria-label="Find an office or service desk"></label>
+          <button type="button" class="button" id="refresh-offices"><svg class="icon sm"><use href="#i-clock"/></svg>Refresh sample</button>
+          <span class="sr-only" id="office-status-live" aria-live="polite"></span>
         </div>
         <div class="office-grid" id="office-grid" aria-live="polite"></div>
-        <p class="availability-note"><strong>Demo data:</strong> these officer and queue statuses are sample values that rotate locally for this prototype. They are not connected to government systems and do not reflect actual staff availability. Confirm office details before travelling.</p>
+        <p class="availability-note"><strong>Prototype status:</strong> these officer and queue values are simulated examples, not live availability. A real status feed would need an authorized department source and current office-level data. Use the office and map links as starting points; confirm the responsible counter before travelling.</p>
+        <div class="source-note"><span>Official integration discovery:</span><a href="https://directory.apisetu.gov.in/" target="_blank" rel="noopener noreferrer">API Setu directory</a><a href="https://www.data.gov.in/" target="_blank" rel="noopener noreferrer">Open Government Data India</a><span>Source availability and access permissions vary by department.</span></div>
       </div>
     </section>
 
@@ -629,16 +660,29 @@
       { id: 'caste', title: 'Caste / SEBC certificate', category: 'certificates', categoryLabel: 'Certificates', icon: 'i-badge', desc: 'See where to check Odisha certificate requirements and apply.', portal: 'eDistrict Odisha', url: 'https://edistrict.odisha.gov.in/', keywords: 'caste sebc obc sc st community social certificate', docs: ['Identity and residence evidence', 'Community or family records if required by the issuing authority', 'Self-declaration or supporting documents requested on the portal'], steps: ['Confirm the relevant certificate type and eligibility rules.', 'Review the official Odisha eDistrict checklist for your application.', 'Apply online or use an authorised service centre if you need assistance.', 'Keep your acknowledgement and check status through the official service.'] },
       { id: 'land', title: 'Land records / RoR', category: 'land', categoryLabel: 'Land & property', icon: 'i-map', desc: 'Look up land record information through Odisha’s Bhulekh portal.', portal: 'Bhulekh Odisha', url: 'https://bhulekh.ori.nic.in/', keywords: 'land record ror bhulekh plot khata patta property', docs: ['District, Tahasil and village details', 'Khata or plot information, if available', 'Ownership or supporting records if you need a correction or related service'], steps: ['Open Bhulekh Odisha and select the relevant location.', 'Search using the options currently provided by the portal.', 'Check the displayed record carefully against your documents.', 'For corrections or certified services, follow the Tahasil or department process.'] },
       { id: 'driving', title: 'Driving licence', category: 'transport', categoryLabel: 'Transport', icon: 'i-car', desc: 'Continue to the official transport service and check current steps.', portal: 'mParivahan / Sarathi', url: 'https://mparivahan.parivahan.gov.in/', keywords: 'driving licence license learner dl sarathi transport vehicle', docs: ['Application or learner licence details, where applicable', 'Identity, age and address evidence listed for your service', 'Any appointment, test or medical documents required for your case'], steps: ['Choose the appropriate state and licence service on the official transport portal.', 'Read the current application, fee and document instructions.', 'Complete any required booking or test directly through the portal.', 'Use the official application number to check status.'] },
-      { id: 'birth', title: 'Birth registration & certificates', category: 'civic', categoryLabel: 'Civic services', icon: 'i-file', desc: 'Find state service information for a birth registration or certificate.', portal: 'eDistrict Odisha', url: 'https://edistrict.odisha.gov.in/', keywords: 'birth death civil registration certificate child', docs: ['Registration details such as date and place of event', 'Identity and relationship evidence requested for the application', 'Existing registration number or supporting record, if already registered'], steps: ['Check whether the event is registered and identify the responsible local authority.', 'Review the current state or municipal instructions for the request.', 'Apply through the official route or contact the relevant service centre.', 'Retain the acknowledgement for any correction or status enquiry.'] },
+      { id: 'birth', title: 'Birth registration & certificates', category: 'civic', categoryLabel: 'Civic services', icon: 'i-file', desc: 'Find Odisha birth and death registration services and check your registration status.', portal: 'Birth & Death Odisha', url: 'https://www.birthdeath.odisha.gov.in/citizen-services', keywords: 'birth death civil registration certificate child', docs: ['Registration details such as date and place of event', 'Identity and relationship evidence requested for the application', 'Existing registration number or supporting record, if already registered'], steps: ['Check whether the event is registered and identify the responsible local authority.', 'Review the current state or municipal instructions for the request.', 'Apply through the official route or contact the relevant service centre.', 'Retain the acknowledgement for any correction or status enquiry.'] },
       { id: 'pension', title: 'Pension & welfare support', category: 'welfare', categoryLabel: 'Welfare', icon: 'i-heart', desc: 'Discover schemes and confirm eligibility with the responsible department.', portal: 'myScheme / UMANG', url: 'https://www.myscheme.gov.in/find-scheme', keywords: 'pension welfare benefit assistance social support senior disability', docs: ['Identity and residence evidence required for the selected scheme', 'Bank or income details only where the official scheme asks for them', 'Age, disability, family or other eligibility records as applicable'], steps: ['Search myScheme or UMANG for a relevant central or state programme.', 'Read the scheme page and confirm its current eligibility conditions.', 'Prepare only the documents named by the implementing department.', 'Apply using the official channel listed for that scheme.'] },
       { id: 'ration', title: 'Ration card & food support', category: 'welfare', categoryLabel: 'Welfare', icon: 'i-home', desc: 'Find the current state or national route for food and household services.', portal: 'UMANG', url: 'https://www.umang.gov.in/landing/', keywords: 'ration card food public distribution pds household', docs: ['Household and identity details requested by the relevant state service', 'Address or family records if required for the transaction', 'Existing ration card details for correction or status requests'], steps: ['Open UMANG or the responsible state food and supplies portal.', 'Select the matching service and check current state instructions.', 'Apply or update details through the official service.', 'Keep the receipt or reference number for follow-up.'] },
       { id: 'schemes', title: 'Find schemes & benefits', category: 'welfare', categoryLabel: 'Welfare', icon: 'i-heart', desc: 'Explore central and state schemes using the official discovery platform.', portal: 'myScheme', url: 'https://www.myscheme.gov.in/find-scheme', keywords: 'scheme benefits scholarship subsidy government programme', docs: ['You can browse without sharing details with this prototype', 'The official scheme finder may ask profile questions to identify relevant schemes', 'Check the scheme page for the final document list'], steps: ['Open the myScheme official finder.', 'Use its filters or guided questions to discover relevant programmes.', 'Read the scheme details and confirm current eligibility with the department.', 'Follow the official application link shown on the scheme page.'] },
       { id: 'grievance', title: 'Public service grievance', category: 'civic', categoryLabel: 'Civic & grievances', icon: 'i-shield', desc: 'Use the official grievance channel for an eligible public service issue.', portal: 'CPGRAMS', url: 'https://pgportal.gov.in/V7/Home', keywords: 'complaint grievance issue bribe corruption public service', docs: ['Department and service involved', 'Relevant dates and a clear description of the issue', 'Reference number or supporting record, if available'], steps: ['Check whether your matter falls within CPGRAMS or another department channel.', 'Submit the grievance only on the official portal.', 'Keep the unique registration ID and use the official status page.', 'Do not post personal or sensitive details in public.'] }
     ];
 
+    const officeGuides = {
+      income: { desk: 'Tahasil / Revenue certificate counter', role: 'Ask the certificate or e-District help counter which revenue officer handles your application.', map: 'Tahasil Office', note: 'The responsible officer can depend on your Tahasil and the exact service.' },
+      ews: { desk: 'Tahasil / Revenue certificate counter', role: 'Ask the certificate counter which revenue officer is responsible for EWS certificates in your area.', map: 'Tahasil Office', note: 'Confirm current eligibility and the designated issuing authority on the official portal.' },
+      caste: { desk: 'Tahasil / Revenue certificate counter', role: 'Ask the certificate counter which revenue officer handles your certificate type and locality.', map: 'Tahasil Office', note: 'The correct route may vary by certificate type and local jurisdiction.' },
+      land: { desk: 'Tahasil land records / mutation counter', role: 'Ask the land records counter or designated Revenue Inspector about the specific record or correction.', map: 'Tahasil Office land records', note: 'For a simple record lookup, try Bhulekh online before travelling.' },
+      driving: { desk: 'Regional Transport Office (RTO) licensing counter', role: 'Ask the licensing counter about your application, test, or appointment reference.', map: 'Regional Transport Office RTO', note: 'Use the official transport portal to identify the RTO assigned to your application.' },
+      birth: { desk: 'Local Birth & Death Registrar / municipal service counter', role: 'Ask the local registrar or municipal service counter responsible for the place where the event was registered.', map: 'Municipal Corporation Birth Death Registrar', note: 'In rural areas, the registering authority may be different; confirm online first.' },
+      pension: { desk: 'Block welfare / social security desk', role: 'Ask the block or local welfare desk which scheme officer handles your programme.', map: 'Block Development Office Welfare Desk', note: 'The implementing department depends on the scheme and eligibility group.' },
+      ration: { desk: 'Food Supplies / ration card service counter', role: 'Ask the local food supplies or block service counter about the relevant ration-card transaction.', map: 'Food Supplies Office Ration Card', note: 'Check the state portal for the current service channel before visiting.' },
+      schemes: { desk: 'Scheme implementing department help desk', role: 'Use the scheme page to identify its implementing department and ask that department’s citizen help desk.', map: 'District Social Welfare Office Government Scheme Help Desk', note: 'There is no single office for all schemes; confirm the department on myScheme.' },
+      grievance: { desk: 'Department grievance officer (online first)', role: 'Submit through the official grievance channel and use its assigned department and registration ID for follow-up.', map: 'District Public Grievance Cell', note: 'Do not travel or share sensitive information unless the official channel asks you to.' }
+    };
+
     const i18n = {
       en: {
-        locationLabel:'Location', availabilityKicker:'Local service preview', availabilityTitle:'Officer & service desk availability', availabilityIntro:'Choose a desk to see the demo status and open directions in Maps.', statusDemo:'Demo simulation · updates', sosButton:'Bribe SOS',
+        locationLabel:'Location', availabilityKicker:'Local service preview', availabilityTitle:'Officer & service desk availability', availabilityIntro:'Choose a desk to see the sample scenario and open directions in Maps.', statusDemo:'Sample scenario · refreshed', sosButton:'Bribe SOS',
         skip:'Skip to main content', topNote:'Independent citizen service guide • India', topRight:'Prototype · No government affiliation', navServices:'Services', navSchemes:'Schemes', navPortals:'Official portals', navHelp:'Help', navDesk:'My desk',
         heroBadge:'A clearer path to public services', heroTitle:'Government services,<br><em>made easier.</em>', heroCopy:'Find the right official portal, see what to prepare, and keep your next steps in one simple place.', searchPlaceholder:'Try “income certificate” or “land records”', searchButton:'Find a service', popular:'Popular:',
         journeyTitle:'Your service journey', journeyTag:'Simple by design', journeyOne:'Find the right service', journeyOneText:'Search or browse plain-language service cards.', journeyTwo:'Get prepared', journeyTwoText:'Review a starter checklist and next steps.', journeyThree:'Continue on the official site', journeyThreeText:'Open the relevant government portal to apply.', journeyFoot:'Your personal details are not needed to browse this guide.',
@@ -714,6 +758,7 @@
     let currentQuery = '';
     let activeServiceId = '';
     let officeDemoTick = 0;
+    let officeDemoUpdatedAt = new Date();
     let toastTimer;
     const $ = function (selector, root) { return (root || document).querySelector(selector); };
 
@@ -796,18 +841,49 @@
     function renderOfficePreview() {
       const grid = $('#office-grid');
       if (!grid) return;
-      grid.innerHTML = officeDemos.map(function (office, index) {
+      const term = ($('#office-filter') ? $('#office-filter').value : '').trim().toLowerCase();
+      const filtered = officeDemos.filter(function (office) {
+        const service = serviceById(office.service);
+        return !term || [office.name, office.mapName, service.title, service.categoryLabel].join(' ').toLowerCase().includes(term);
+      });
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="office-empty">No service desks match that search. Try “revenue”, “birth”, or “transport”.</div>';
+      } else grid.innerHTML = filtered.map(function (office, index) {
         const sample = office.states[(officeDemoTick + index) % office.states.length];
         const service = serviceById(office.service);
+        const waitMinutes = Number((sample.wait.match(/\d+/) || [0])[0]);
+        const queueWidth = Math.max(16, Math.min(92, waitMinutes ? 22 + waitMinutes * 2 : 18));
         return '<article class="office-card"><div class="office-card-top"><span class="office-icon"><svg class="icon"><use href="#' + office.icon + '"/></svg></span><span class="availability-pill ' + sample.kind + '">' + sample.label + '</span></div>' +
-          '<h3>' + office.name + '</h3><p>' + $('#location-select').value + ' area · sample preview</p>' +
-          '<div class="office-meta"><span>Officer availability</span><strong>' + sample.officer + '</strong></div>' +
-          '<div class="office-meta" style="margin-top:-9px"><span>Estimated queue</span><strong>' + sample.wait + '</strong></div>' +
-          '<div class="office-actions"><a href="' + mapsSearchUrl(office.mapName) + '" target="_blank" rel="noopener noreferrer"><svg class="icon sm"><use href="#i-pin"/></svg>Directions</a><button type="button" data-office-plan="' + service.id + '"><svg class="icon sm"><use href="#i-clock"/></svg>Plan visit</button></div></article>';
+          '<h3>' + safeText(office.name) + '</h3><p>' + safeText($('#location-select').value) + ' area · suggested location</p>' +
+          '<div class="office-meta"><span>Desk scenario</span><strong>' + safeText(sample.officer) + '</strong></div>' +
+          '<div class="office-meta" style="margin-top:-9px"><span>Illustrative wait</span><strong>' + safeText(sample.wait) + '</strong></div><div class="queue-meter" role="img" aria-label="Illustrative queue level, sample only"><span style="width:' + queueWidth + '%"></span></div><span class="sample-label">Sample scenario · not a live update</span>' +
+          '<div class="office-actions"><a href="' + mapsSearchUrl(office.mapName) + '" target="_blank" rel="noopener noreferrer"><svg class="icon sm"><use href="#i-pin"/></svg>Open Maps</a><button type="button" data-office-guide="' + service.id + '"><svg class="icon sm"><use href="#i-file"/></svg>Service steps</button><button type="button" data-office-plan="' + service.id + '" aria-label="Plan a visit for ' + safeText(service.title) + '"><svg class="icon sm"><use href="#i-clock"/></svg>Plan</button></div></article>';
       }).join('');
-      $('#status-time').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      $('#status-time').textContent = officeDemoUpdatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
     function serviceById(id) { return services.find(function (service) { return service.id === id; }); }
+    function stopGuideSpeech() {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      const status = $('#audio-guide-status');
+      if (status) status.textContent = 'Audio guide stopped.';
+    }
+    function speakServiceGuide(service) {
+      if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) {
+        showToast('Audio playback is not supported in this browser. You can still read the steps below.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const office = officeGuides[service.id];
+      const words = 'Hello! Let’s go through ' + service.title + ' together. First, ' + service.steps[0] + ' Second, take a moment to review the starter checklist on this page. Third, ' + office.role + ' ' + service.steps[2] + ' Finally, ' + service.steps[3] + ' The suggested desk is ' + office.desk + '. This is general guidance. Please confirm the current rules and responsible office on ' + service.portal + ' before travelling or applying. You are ready to take it one step at a time.';
+      const utterance = new SpeechSynthesisUtterance(words);
+      utterance.lang = 'en-IN';
+      utterance.rate = 0.94;
+      utterance.pitch = 1.02;
+      utterance.onstart = function () { const status = $('#audio-guide-status'); if (status) status.textContent = 'Playing your friendly process guide…'; };
+      utterance.onend = function () { const status = $('#audio-guide-status'); if (status) status.textContent = 'Guide finished. You can replay it or review the written steps.'; };
+      utterance.onerror = function () { const status = $('#audio-guide-status'); if (status) status.textContent = 'Audio could not start. Please use the written guide.'; };
+      window.speechSynthesis.speak(utterance);
+    }
     function filteredServices() {
       const term = currentQuery.trim().toLowerCase();
       return services.filter(function (service) {
@@ -833,18 +909,21 @@
     function renderDetail(id) {
       const service = serviceById(id);
       if (!service) return;
+      stopGuideSpeech();
       activeServiceId = id;
       const detail = $('#service-detail');
+      const office = officeGuides[id];
       const checks = getStored(storageKeys.checks, {});
       const done = Array.isArray(checks[id]) ? checks[id] : [];
       detail.innerHTML = '<article class="detail-panel">' +
         '<div class="detail-head"><div><span class="detail-category">' + safeText(service.categoryLabel) + ' · PREPARATION GUIDE</span><h3>' + safeText(service.title) + '</h3><p>' + safeText(service.desc) + '</p></div><button type="button" class="close-detail" id="close-detail" aria-label="Close details">×</button></div>' +
-        '<div class="step-guide"><span class="guided-step"><b>01</b>Confirm eligibility</span><span class="guided-step"><b>02</b>Gather documents</span><span class="guided-step"><b>03</b>Apply officially</span><span class="guided-step"><b>04</b>Track your request</span></div>' +
+        '<div class="step-guide" role="group" aria-label="Choose a stage of the service journey"><button class="guided-step" type="button" data-guide-stage="0" aria-pressed="true"><b>01</b>Understand your route</button><button class="guided-step" type="button" data-guide-stage="1" aria-pressed="false"><b>02</b>Prepare documents</button><button class="guided-step" type="button" data-guide-stage="2" aria-pressed="false"><b>03</b>Visit or apply</button><button class="guided-step" type="button" data-guide-stage="3" aria-pressed="false"><b>04</b>Track or follow up</button></div><p class="stage-detail" id="stage-detail" aria-live="polite">' + safeText(service.steps[0]) + '</p>' +
         '<div class="detail-body"><div class="detail-box"><h4><svg class="icon"><use href="#i-check"/></svg>Step 2 · Starter document checklist</h4><p class="check-progress" id="check-progress">' + done.length + ' of ' + service.docs.length + ' checked</p><div class="progress-track" role="progressbar" aria-label="Checklist progress" aria-valuemin="0" aria-valuemax="' + service.docs.length + '" aria-valuenow="' + done.length + '"><span id="progress-fill" style="width:' + Math.round(done.length / service.docs.length * 100) + '%"></span></div><ul class="detail-list">' + service.docs.map(function (item, index) {
           const checked = done.indexOf(index) >= 0;
           return '<li><label><input type="checkbox" data-check="' + index + '"' + (checked ? ' checked' : '') + '><span>' + safeText(item) + '</span></label></li>';
         }).join('') + '</ul><div class="detail-callout"><strong>Check the official list:</strong> requirements can vary by applicant and may change. Do not treat this starter list as an official checklist.</div></div>' +
-        '<div class="detail-box"><h4><svg class="icon"><use href="#i-file"/></svg>Suggested next steps</h4><ol class="detail-steps">' + service.steps.map(function (step) { return '<li>' + safeText(step) + '</li>'; }).join('') + '</ol>' +
+        '<div class="detail-box"><h4><svg class="icon"><use href="#i-file"/></svg>Your friendly process guide</h4><div class="audio-guide"><button class="button primary" type="button" id="speak-guide"><svg class="icon sm"><use href="#i-mic"/></svg>Listen to the English guide</button><button class="button" type="button" id="stop-guide">Stop audio</button><p>Hear the steps, suggested desk and a reminder to confirm details on the official portal.</p><span class="audio-guide-status" id="audio-guide-status" aria-live="polite">Audio starts only when you press play. English voice availability depends on your browser.</span></div><h4><svg class="icon"><use href="#i-file"/></svg>Suggested next steps</h4><ol class="detail-steps">' + service.steps.map(function (step, index) { return '<li data-step-detail="' + index + '">' + safeText(step) + '</li>'; }).join('') + '</ol>' +
+        '<div class="office-advice"><strong>Suggested desk to ask</strong><p><b>' + safeText(office.desk) + '</b><br>' + safeText(office.role) + '<br>' + safeText(office.note) + '</p><a class="button" href="' + mapsSearchUrl(office.map) + '" target="_blank" rel="noopener noreferrer"><svg class="icon sm"><use href="#i-pin"/></svg>Find this desk in Google Maps</a></div>' +
         '<div class="detail-actions"><a class="button primary" href="' + service.url + '" target="_blank" rel="noopener noreferrer">Open ' + safeText(service.portal) + ' <svg class="icon sm"><use href="#i-external"/></svg></a><button class="button" type="button" id="save-service"><svg class="icon sm"><use href="#i-bookmark"/></svg>' + (getStored(storageKeys.saved, []).indexOf(id) >= 0 ? 'Saved' : 'Save service') + '</button><button class="button" type="button" id="make-plan"><svg class="icon sm"><use href="#i-clock"/></svg>Plan next step</button><button class="button" type="button" id="print-checklist"><svg class="icon sm"><use href="#i-file"/></svg>Print checklist</button></div></div></div></article>';
       detail.classList.remove('hidden');
       detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1003,7 +1082,31 @@
       if (button) renderDetail(button.dataset.service);
     });
     $('#service-detail').addEventListener('click', function (event) {
-      if (event.target.closest('#close-detail')) { $('#service-detail').classList.add('hidden'); activeServiceId = ''; }
+      if (event.target.closest('#close-detail')) { stopGuideSpeech(); $('#service-detail').classList.add('hidden'); activeServiceId = ''; }
+      const stageButton = event.target.closest('[data-guide-stage]');
+      if (stageButton) {
+        const stage = Number(stageButton.dataset.guideStage);
+        const service = serviceById(activeServiceId);
+        const office = officeGuides[activeServiceId];
+        document.querySelectorAll('#service-detail [data-guide-stage]').forEach(function (button) { button.setAttribute('aria-pressed', String(button === stageButton)); });
+        document.querySelectorAll('#service-detail [data-step-detail]').forEach(function (step) { step.classList.remove('is-active'); });
+        $('#service-detail .office-advice').classList.remove('is-active');
+        if (stage === 1) {
+          $('#stage-detail').textContent = 'Work through the starter checklist, then verify the final list on the official portal.';
+          $('#service-detail .detail-list').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (stage === 2) {
+          $('#stage-detail').textContent = office.role + ' ' + service.steps[2];
+          $('#service-detail .office-advice').classList.add('is-active');
+          $('#service-detail .office-advice').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          const step = $('#service-detail [data-step-detail="' + stage + '"]');
+          step.classList.add('is-active');
+          $('#stage-detail').textContent = service.steps[stage];
+          step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      if (event.target.closest('#speak-guide')) speakServiceGuide(serviceById(activeServiceId));
+      if (event.target.closest('#stop-guide')) stopGuideSpeech();
       if (event.target.closest('#save-service')) toggleSaved(activeServiceId);
       if (event.target.closest('#make-plan')) openPlanModal(activeServiceId);
       if (event.target.closest('#print-checklist')) {
@@ -1029,7 +1132,17 @@
     });
     $('#office-grid').addEventListener('click', function (event) {
       const button = event.target.closest('[data-office-plan]');
+      const guide = event.target.closest('[data-office-guide]');
       if (button) openPlanModal(button.dataset.officePlan);
+      if (guide) { renderDetail(guide.dataset.officeGuide); $('#service-detail').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+    $('#office-filter').addEventListener('input', renderOfficePreview);
+    $('#refresh-offices').addEventListener('click', function () {
+      officeDemoTick += 1;
+      officeDemoUpdatedAt = new Date();
+      renderOfficePreview();
+      $('#office-status-live').textContent = 'The local sample scenario changed. No government status was checked.';
+      showToast('Sample scenarios refreshed. This is not a live government update.');
     });
     $('#visit-form').addEventListener('submit', function (event) {
       event.preventDefault();
@@ -1051,7 +1164,7 @@
     });
     $('#voice-button').addEventListener('click', startVoiceSearch);
     $('#language-select').addEventListener('change', function () { applyLanguage(this.value); });
-    $('#location-select').addEventListener('change', function () { updatePlaceGreeting(); renderOfficePreview(); });
+    $('#location-select').addEventListener('change', function () { updatePlaceGreeting(); renderOfficePreview(); if (activeServiceId) renderDetail(activeServiceId); });
     $('#sos-open').addEventListener('click', openSosModal);
     $('#sos-close').addEventListener('click', closeSosModal);
     $('#sos-modal').addEventListener('click', function (event) { if (event.target === this) closeSosModal(); });
@@ -1076,7 +1189,6 @@
     } catch (e) {}
     updatePlaceGreeting();
     renderOfficePreview();
-    setInterval(function () { officeDemoTick += 1; renderOfficePreview(); }, 30000);
   </script>
 </body>
 </html>
