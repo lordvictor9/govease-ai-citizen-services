@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" fill="none">
+  <defs>
+    <linearGradient id="marble" x1="760" y1="270" x2="1360" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff8e9"/>
+      <stop offset=".55" stop-color="#f3eee1"/>
+      <stop offset="1" stop-color="#cce8dc"/>
+    </linearGradient>
+    <linearGradient id="saffron" x1="1050" y1="40" x2="1340" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffb05c" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#ffb05c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="tricolor" x1="640" y1="640" x2="1390" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e98c45"/>
+      <stop offset=".49" stop-color="#fff3dd"/>
+      <stop offset="1" stop-color="#73c4a1"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="translate(1195 205) rotate(90) scale(230)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffd08e" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#ffd08e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g opacity=".28">
+    <circle cx="1195" cy="205" r="230" fill="url(#halo)"/>
+    <circle cx="1270" cy="175" r="68" stroke="#ffe8c6" stroke-width="2"/>
+    <circle cx="1270" cy="175" r="53" stroke="#a8ddd0" stroke-width="1.5"/>
+    <g stroke="#a8ddd0" stroke-width="1.4" stroke-linecap="round">
+      <path d="M1270 124v102M1219 175h102M1234 139l72 72M1306 139l-72 72"/>
+      <path d="M1270 119v112M1214 175h112M1230 135l80 80M1310 135l-80 80" transform="rotate(22.5 1270 175)"/>
+    </g>
+    <circle cx="1270" cy="175" r="5" fill="#a8ddd0"/>
+    <path d="M0 622c206-65 376-72 537-24 133 40 244 51 350 14 128-45 303-35 553 35v53H0v-78Z" fill="url(#tricolor)" opacity=".5"/>
+    <path d="M0 654c218-54 399-51 566-2 160 48 276 45 399-1 132-49 281-44 475 6" stroke="#fff4e0" stroke-width="2"/>
+
+    <!-- A soft, hand-drawn Taj Mahal silhouette as a decorative India cue. -->
+    <g fill="url(#marble)" stroke="#fff9ed" stroke-width="3" stroke-linejoin="round">
+      <path d="M730 594V414h38V594h-38Zm-12-180 31-32 31 32v16h-62v-16Zm16-32v-13h30v13"/>
+      <path d="M1318 594V414h38V594h-38Zm-12-180 31-32 31 32v16h-62v-16Zm16-32v-13h30v13"/>
+      <path d="M800 574V427h66v147H800Zm-8-147 41-34 41 34v15h-82v-15Z"/>
+      <path d="M1186 574V427h66v147h-66Zm-8-147 41-34 41 34v15h-82v-15Z"/>
+      <path d="M860 548V390h337v158H860Z"/>
+      <path d="M911 390c0-82 49-129 117-145 68 16 117 63 117 145H911Z"/>
+      <path d="M1009 245c0-31 7-47 19-58 12 11 19 27 19 58h-38Z"/>
+      <path d="M1022 190h12v-22h-12v22Zm6-21-8-10 8-15 8 15-8 10Z"/>
+      <path d="M845 574h367v18H845zM820 592h417v16H820zM796 608h465v14H796z"/>
+      <path d="M889 390c0-34 17-53 42-66 25 13 42 32 42 66h-84Zm254 0c0-34 17-53 42-66 25 13 42 32 42 66h-84Z"/>
+    </g>
+    <g fill="#0e706b" opacity=".64">
+      <path d="M1017 547v-66c0-34 14-54 21-58 7 4 21 24 21 58v66h-42Z"/>
+      <path d="M885 547v-31c0-19 9-31 18-36 9 5 18 17 18 36v31h-36Zm235 0v-31c0-19 9-31 18-36 9 5 18 17 18 36v31h-36Z"/>
+      <path d="M808 574v-45c0-16 8-26 17-31 9 5 17 15 17 31v45h-34Zm410 0v-45c0-16 8-26 17-31 9 5 17 15 17 31v45h-34Z"/>
+      <path d="M738 594v-98c0-18 7-30 11-34 5 4 11 16 11 34v98h-22Zm590 0v-98c0-18 7-30 11-34 5 4 11 16 11 34v98h-22Z"/>
+    </g>
+    <g fill="#f6bd78" opacity=".8">
+      <circle cx="1038" cy="462" r="5"/><circle cx="903" cy="480" r="4"/><circle cx="1140" cy="480" r="4"/>
+      <circle cx="825" cy="510" r="3.5"/><circle cx="1228" cy="510" r="3.5"/>
+    </g>
+    <g fill="#eaf6ef" opacity=".8">
+      <path d="M655 270c14-13 27-13 41 0-14-5-27-5-41 0Zm62 32c12-11 23-11 35 0-12-4-23-4-35 0Zm520-161c12-11 23-11 35 0-12-4-23-4-35 0Z"/>
+    </g>
+  </g>
+</svg>
+
