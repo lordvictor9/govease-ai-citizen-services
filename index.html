@@ -192,7 +192,7 @@
     .assistant-message.user { align-self: flex-end; border-color: #cbe5da; border-radius: 13px 13px 4px 13px; background: #e8f5ee; color: #214d4b; }
     .assistant-action { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; padding: 6px 9px; border: 1px solid #cbded4; border-radius: 9px; background: #f4faf6; color: var(--teal-dark); font-size: 9px; font-weight: 850; text-decoration: none; cursor: pointer; }
     .assistant-action:hover { border-color: #8bbdac; background: white; }
-    .assistant-prompts { display: flex; gap: 6px; overflow-x: auto; padding: 9px 12px; border-top: 1px solid #e7eee9; }
+    .assistant-prompts { display: flex; flex-wrap: wrap; gap: 6px; max-height: 84px; overflow-y: auto; padding: 9px 12px; border-top: 1px solid #e7eee9; }
     .assistant-prompts button { flex: 0 0 auto; padding: 6px 8px; border: 1px solid #dce8e2; border-radius: 99px; background: white; color: #53706e; font-size: 9px; font-weight: 750; }
     .assistant-form { display: flex; gap: 7px; padding: 10px 12px; border-top: 1px solid #e7eee9; }
     .assistant-form input { min-width: 0; flex: 1; height: 39px; padding: 0 11px; border: 1px solid #dce6e0; border-radius: 10px; color: var(--ink); font-size: 11px; }
@@ -436,6 +436,9 @@
       .office-grid { grid-template-columns: 1fr; }
       .city-map-card { grid-template-columns: 1fr; gap: 8px; }
       .document-layout { grid-template-columns: 1fr; }
+      .assistant-fab { width: 46px; height: 46px; justify-content: center; padding: 0; border-radius: 50%; }
+      .assistant-fab > span:not(.assistant-spark), .sos-fab > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+      .sos-fab { width: 46px; height: 46px; justify-content: center; padding: 0; border-radius: 50%; }
       .city-map-frame, .city-map-frame iframe { min-height: 190px; }
       .section { padding: 54px 0; }
       .section.compact { padding: 39px 0; }
@@ -773,7 +776,7 @@
     </section>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <button class="assistant-fab" id="assistant-open" type="button" aria-expanded="false" aria-controls="assistant-panel"><span class="assistant-spark" aria-hidden="true">✦</span><span>Ask GovEase</span></button>
+  <button class="assistant-fab" id="assistant-open" type="button" aria-label="Ask GovEase AI service guide" title="Ask GovEase" aria-expanded="false" aria-controls="assistant-panel"><span class="assistant-spark" aria-hidden="true">✦</span><span>Ask GovEase</span></button>
   <section class="assistant-panel hidden" id="assistant-panel" aria-label="GovEase instant service guide">
     <div class="assistant-head"><div><strong>GovEase AI guide</strong><small>Instant help from this prototype’s service guides</small></div><button type="button" id="assistant-close" aria-label="Close assistant">×</button></div>
     <div class="assistant-messages" id="assistant-messages" role="log" aria-live="polite" aria-relevant="additions">
