@@ -176,9 +176,10 @@
     .availability-note { max-width: 830px; margin: 15px 0 0; color: #b6cecd; font-size: 9px; line-height: 1.55; }
     .source-note { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin-top: 11px; color: #c4d7d7; font-size: 9px; }
     .source-note a { color: #ffe0b4; font-weight: 800; text-underline-offset: 2px; }
-    .sos-fab { position: fixed; z-index: 45; right: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 8px; min-height: 49px; padding: 0 16px; border: 0; border-radius: 99px; background: #c23e3e; color: white; box-shadow: 0 10px 30px rgba(103,25,25,.3); font-size: 11px; font-weight: 900; }
+    .sos-fab { position: fixed; z-index: 45; right: 18px; bottom: 18px; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%; background: #c23e3e; color: white; box-shadow: 0 10px 30px rgba(103,25,25,.3); font-size: 11px; font-weight: 900; }
     .sos-fab:hover { background: #a92d32; transform: translateY(-2px); }
-    .assistant-fab { position: fixed; z-index: 51; left: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 8px; min-height: 49px; padding: 0 16px; border: 1px solid rgba(255,255,255,.6); border-radius: 99px; background: linear-gradient(115deg, #087e70, #15516a); color: white; box-shadow: 0 10px 30px rgba(15,65,72,.28); font-size: 11px; font-weight: 900; }
+    .sos-fab > span, .assistant-fab > span:not(.assistant-spark) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    .assistant-fab { position: fixed; z-index: 51; left: 18px; bottom: 18px; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; background: linear-gradient(115deg, #087e70, #15516a); color: white; box-shadow: 0 10px 30px rgba(15,65,72,.28); font-size: 11px; font-weight: 900; }
     .assistant-fab:hover { transform: translateY(-2px); box-shadow: 0 13px 32px rgba(15,65,72,.34); }
     .assistant-fab .assistant-spark { font-size: 16px; }
     .assistant-panel { position: fixed; z-index: 52; left: 18px; bottom: 78px; display: grid; grid-template-rows: auto minmax(110px,1fr) auto auto; width: min(370px, calc(100vw - 30px)); max-height: min(520px, 72vh); overflow: hidden; border: 1px solid #dce8e2; border-radius: 19px; background: white; box-shadow: 0 20px 55px rgba(13,43,58,.24); }
