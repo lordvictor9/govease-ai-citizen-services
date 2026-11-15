@@ -62,7 +62,7 @@
     .count-badge { display: inline-grid; min-width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--teal); color: white; font-size: 10px; }
     .menu-button { display: none; border: 0; background: transparent; color: var(--navy); padding: 7px; }
 
-    .hero { --pointer-x: 72%; --pointer-y: 35%; position: relative; overflow: hidden; padding: 56px 0 52px; background: url("india-inspired-background.svg") right 3% center / auto 120% no-repeat, radial-gradient(ellipse 42rem 35rem at var(--pointer-x) var(--pointer-y), rgba(255,208,142,.22), transparent 68%), linear-gradient(116deg, #113754 0%, #116b68 58%, #bf753c 120%); }
+    .hero { --pointer-x: 72%; --pointer-y: 35%; --weather-glow: rgba(255,208,142,.22); position: relative; overflow: hidden; padding: 56px 0 52px; background: url("india-inspired-background.svg") right 3% center / auto 120% no-repeat, radial-gradient(ellipse 42rem 35rem at var(--pointer-x) var(--pointer-y), var(--weather-glow), transparent 68%), linear-gradient(116deg, #113754 0%, #116b68 58%, #bf753c 120%); }
     .hero:before, .hero:after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
     .hero:before { width: 500px; height: 500px; right: -170px; top: -230px; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 0 0 46px rgba(255,255,255,.035), 0 0 0 93px rgba(255,255,255,.025); transform: translate3d(var(--pointer-shift-x, 0px), calc(var(--pointer-shift-y, 0px) + var(--scroll-shift, 0px)), 0); transition: transform .4s ease-out; }
     .hero:after { width: 360px; height: 360px; left: -220px; bottom: -245px; border: 1px solid rgba(255,193,133,.28); box-shadow: 0 0 0 40px rgba(255,193,133,.045); transform: translate3d(var(--pointer-shift-x-reverse, 0px), calc(var(--pointer-shift-y-reverse, 0px) - var(--scroll-shift, 0px)), 0); transition: transform .55s ease-out; }
@@ -97,6 +97,21 @@
     .visual-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 23px; }
     .visual-label { color: var(--navy); font-size: 14px; font-weight: 850; }
     .visual-tag { padding: 5px 9px; border-radius: 99px; background: #e7f4ed; color: var(--teal-dark); font-size: 10px; font-weight: 800; }
+    .weather-card { display: flex; align-items: center; gap: 11px; margin: -10px 0 18px; padding: 10px 12px; border: 1px solid rgba(143,183,161,.38); border-radius: 14px; background: linear-gradient(105deg, rgba(255,239,211,.8), rgba(230,245,237,.88)); }
+    .weather-card[data-weather="cloudy"], .weather-card[data-weather="fog"] { background: linear-gradient(105deg, #edf0e9, #e3efec); }
+    .weather-card[data-weather="rain"] { background: linear-gradient(105deg, #e4eef5, #e3f1ed); }
+    .weather-card[data-weather="storm"] { background: linear-gradient(105deg, #e7eaf5, #e3eff2); }
+    .weather-orb { width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 13px; background: rgba(255,255,255,.72); box-shadow: 0 4px 11px rgba(23,51,73,.08); font-size: 22px; }
+    .weather-copy { display: grid; min-width: 0; gap: 2px; }
+    .weather-kicker { color: #73837f; font-size: 8px; font-weight: 850; letter-spacing: .6px; text-transform: uppercase; }
+    .weather-main { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; }
+    .weather-main strong { color: var(--navy); font-size: 17px; line-height: 1.1; }
+    .weather-main span { color: #4f696e; font-size: 10px; font-weight: 750; }
+    .weather-meta { color: #7b8c8b; font-size: 8px; }
+    .weather-credit { color: #73837f; font-size: 8px; }
+    .weather-credit a { color: var(--teal-dark); text-underline-offset: 2px; }
+    .weather-refresh { width: 31px; height: 31px; display: grid; place-items: center; flex: 0 0 auto; margin-left: auto; border: 1px solid #d4e3da; border-radius: 10px; background: rgba(255,255,255,.68); color: var(--teal-dark); font-size: 17px; }
+    .weather-refresh:hover { background: white; transform: rotate(30deg); }
     .journey { position: relative; display: grid; gap: 17px; }
     .journey:before { content: ""; position: absolute; left: 20px; top: 29px; bottom: 32px; border-left: 2px dashed #c7ddd4; }
     .journey-step { position: relative; display: flex; gap: 14px; align-items: flex-start; }
@@ -143,6 +158,16 @@
     .availability-tools .button { min-height: 39px; border-color: rgba(255,255,255,.23); background: rgba(255,255,255,.1); color: white; }
     .availability-tools .button:hover { background: rgba(255,255,255,.2); }
     .office-empty { grid-column: 1/-1; padding: 22px; border: 1px dashed rgba(255,255,255,.35); border-radius: 14px; color: #d6e5e3; font-size: 12px; text-align: center; }
+    .city-map-card { display: grid; grid-template-columns: .72fr 1.28fr; gap: 18px; align-items: stretch; margin-top: 17px; padding: 13px; border: 1px solid rgba(255,255,255,.18); border-radius: 17px; background: rgba(255,255,255,.08); }
+    .city-map-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 9px; }
+    .city-map-copy .section-kicker { margin-bottom: 6px; color: #f5bb7e; }
+    .city-map-copy h3 { margin: 0 0 7px; color: white; font-size: 18px; }
+    .city-map-copy p { margin: 0 0 12px; color: #c4d7d7; font-size: 10px; line-height: 1.5; }
+    .city-map-copy .button { border-color: rgba(255,255,255,.24); background: rgba(255,255,255,.11); color: white; }
+    .city-map-frame { min-height: 205px; overflow: hidden; border: 1px solid rgba(255,255,255,.26); border-radius: 12px; background: linear-gradient(135deg, #dcebe1, #f4ead4); }
+    .city-map-frame iframe { display: block; width: 100%; height: 100%; min-height: 205px; border: 0; }
+    .map-attribution { margin: 7px 2px 0; color: #b6cecd; font-size: 8px; }
+    .map-attribution a { color: #ffe0b4; text-underline-offset: 2px; }
     .office-card .sample-label { display: inline-block; margin-top: 8px; color: #f5d9b4; font-size: 9px; font-weight: 800; letter-spacing: .2px; }
     .availability-note { max-width: 830px; margin: 15px 0 0; color: #b6cecd; font-size: 9px; line-height: 1.55; }
     .source-note { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin-top: 11px; color: #c4d7d7; font-size: 9px; }
@@ -346,6 +371,8 @@
       .availability-head { display: block; }
       .demo-feed { width: fit-content; margin-top: 13px; }
       .office-grid { grid-template-columns: 1fr; }
+      .city-map-card { grid-template-columns: 1fr; gap: 8px; }
+      .city-map-frame, .city-map-frame iframe { min-height: 190px; }
       .section { padding: 54px 0; }
       .section.compact { padding: 39px 0; }
       .section-head { display: block; }
@@ -488,6 +515,11 @@
             <ellipse cx="63" cy="248" rx="3" ry="6" fill="#12805e"/><ellipse cx="73" cy="258" rx="2" ry="4" fill="#12805e"/>
           </svg>
           <div class="visual-top"><span class="visual-label" data-i18n="journeyTitle">Your service journey</span><span class="visual-tag" data-i18n="journeyTag">Simple by design</span></div>
+          <div class="weather-card" id="weather-card" aria-live="polite">
+            <span class="weather-orb" id="weather-icon" aria-hidden="true">🌤️</span>
+            <div class="weather-copy"><span class="weather-kicker">Local weather estimate · <span id="weather-city">Bhubaneswar</span></span><div class="weather-main"><strong id="weather-temperature">--°C</strong><span id="weather-condition">Getting conditions…</span></div><span class="weather-meta" id="weather-meta">Current model estimate</span><span class="weather-credit"><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather by Open-Meteo</a> · <a href="https://open-meteo.com/en/license" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></span></div>
+            <button type="button" class="weather-refresh" id="weather-refresh" aria-label="Refresh local weather" title="Refresh weather">↻</button>
+          </div>
           <div class="journey">
             <div class="journey-step"><span class="step-num">01</span><div><h3 data-i18n="journeyOne">Find the right service</h3><p data-i18n="journeyOneText">Search or browse plain-language service cards.</p></div></div>
             <div class="journey-step"><span class="step-num">02</span><div><h3 data-i18n="journeyTwo">Get prepared</h3><p data-i18n="journeyTwoText">Review a starter checklist and next steps.</p></div></div>
@@ -527,6 +559,11 @@
           <span class="sr-only" id="office-status-live" aria-live="polite"></span>
         </div>
         <div class="office-grid" id="office-grid" aria-live="polite"></div>
+        <div class="city-map-card">
+          <div class="city-map-copy"><div class="section-kicker">Explore the area</div><h3><span id="map-place-name">Bhubaneswar</span> map view</h3><p>This is an approximate city overview. Use a service desk’s Maps link above when you need directions to a specific office.</p><a class="button" id="city-map-link" href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer"><svg class="icon sm"><use href="#i-pin"/></svg>Open larger map</a></div>
+          <div class="city-map-frame"><iframe id="city-map-frame" title="OpenStreetMap city overview" loading="lazy" referrerpolicy="no-referrer"></iframe></div>
+        </div>
+        <p class="map-attribution">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> · Open Database License (ODbL).</p>
         <p class="availability-note"><strong>Prototype status:</strong> these officer and queue values are simulated examples, not live availability. A real status feed would need an authorized department source and current office-level data. Use the office and map links as starting points; confirm the responsible counter before travelling.</p>
         <div class="source-note"><span>Official integration discovery:</span><a href="https://directory.apisetu.gov.in/" target="_blank" rel="noopener noreferrer">API Setu directory</a><a href="https://www.data.gov.in/" target="_blank" rel="noopener noreferrer">Open Government Data India</a><span>Source availability and access permissions vary by department.</span></div>
       </div>
@@ -760,6 +797,16 @@
     let activeServiceId = '';
     let officeDemoTick = 0;
     let officeDemoUpdatedAt = new Date();
+    let weatherRequestController = null;
+    let weatherRequestId = 0;
+    const weatherCache = new Map();
+    const cityFallbackCoordinates = {
+      Bhubaneswar: { latitude: 20.2961, longitude: 85.8245 },
+      Cuttack: { latitude: 20.4625, longitude: 85.8830 },
+      Puri: { latitude: 19.8135, longitude: 85.8312 },
+      Sambalpur: { latitude: 21.4669, longitude: 83.9812 },
+      Rourkela: { latitude: 22.2604, longitude: 84.8536 }
+    };
     let toastTimer;
     const $ = function (selector, root) { return (root || document).querySelector(selector); };
 
@@ -834,6 +881,101 @@
       $('#welcome-place').textContent = language === 'en' ? place : translated[place][language];
       $('#hello-word').textContent = language === 'hi' ? 'नमस्कार' : language === 'or' ? 'ନମସ୍କାର' : 'Namaskar';
       try { localStorage.setItem('govease.location.v1', place); } catch (e) {}
+    }
+    function weatherDescription(code, isDay) {
+      if (code === 0) return isDay ? ['☀️', 'Clear sky', 'sunny'] : ['🌙', 'Clear night', 'clear'];
+      if (code === 1) return ['🌤️', 'Mostly clear', 'sunny'];
+      if (code === 2) return ['⛅', 'Partly cloudy', 'cloudy'];
+      if (code === 3) return ['☁️', 'Overcast', 'cloudy'];
+      if (code === 45 || code === 48) return ['🌫️', 'Foggy', 'fog'];
+      if (code >= 51 && code <= 57) return ['🌦️', 'Light drizzle', 'rain'];
+      if (code >= 61 && code <= 67) return ['🌧️', 'Rain', 'rain'];
+      if (code >= 71 && code <= 77) return ['❄️', 'Snow', 'cloudy'];
+      if (code >= 80 && code <= 82) return ['🌧️', 'Rain showers', 'rain'];
+      if (code >= 85 && code <= 86) return ['🌨️', 'Snow showers', 'cloudy'];
+      if (code >= 95) return ['⛈️', 'Thunderstorm', 'storm'];
+      return ['🌤️', 'Weather estimate', 'sunny'];
+    }
+    function renderCityMap(city, coordinates) {
+      const lat = Number(coordinates.latitude);
+      const lon = Number(coordinates.longitude);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+      const marker = lat.toFixed(4) + ',' + lon.toFixed(4);
+      const box = [lon - .055, lat - .04, lon + .055, lat + .04].map(function (value) { return value.toFixed(4); }).join(',');
+      $('#city-map-frame').src = 'https://www.openstreetmap.org/export/embed.html?bbox=' + encodeURIComponent(box) + '&layer=mapnik&marker=' + encodeURIComponent(marker);
+      $('#city-map-frame').title = 'OpenStreetMap approximate city overview for ' + city;
+      $('#city-map-link').href = 'https://www.openstreetmap.org/?mlat=' + lat.toFixed(5) + '&mlon=' + lon.toFixed(5) + '#map=12/' + lat.toFixed(5) + '/' + lon.toFixed(5);
+      $('#map-place-name').textContent = city;
+    }
+    function renderWeather(city, current, timezone) {
+      const description = weatherDescription(Number(current.weather_code), Number(current.is_day) === 1);
+      $('#weather-city').textContent = city;
+      $('#weather-icon').textContent = description[0];
+      $('#weather-temperature').textContent = Math.round(Number(current.temperature_2m)) + '°C';
+      $('#weather-condition').textContent = description[1];
+      const feels = Number.isFinite(Number(current.apparent_temperature)) ? 'Feels like ' + Math.round(Number(current.apparent_temperature)) + '°C' : '';
+      const humidity = Number.isFinite(Number(current.relative_humidity_2m)) ? 'Humidity ' + Math.round(Number(current.relative_humidity_2m)) + '%' : '';
+      const time = current.time ? new Date(current.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+      $('#weather-meta').textContent = [feels, humidity, time ? 'Updated ' + time : ''].filter(Boolean).join(' · ') || 'Current model estimate';
+      $('#weather-card').dataset.weather = description[2];
+      $('#weather-card').dataset.timezone = timezone || '';
+      const glow = { sunny: 'rgba(255,208,142,.22)', cloudy: 'rgba(220,236,228,.20)', fog: 'rgba(220,236,228,.20)', rain: 'rgba(140,197,221,.23)', storm: 'rgba(163,178,220,.24)' };
+      $('.hero').style.setProperty('--weather-glow', glow[description[2]] || glow.sunny);
+    }
+    async function loadCityApis(forceRefresh) {
+      const city = $('#location-select').value;
+      const cached = weatherCache.get(city);
+      const freshFor = 20 * 60 * 1000;
+      const fallback = cityFallbackCoordinates[city] || cityFallbackCoordinates.Bhubaneswar;
+      $('#weather-city').textContent = city;
+      renderCityMap(city, fallback);
+      if (weatherRequestController) weatherRequestController.abort();
+      weatherRequestController = null;
+      const requestId = ++weatherRequestId;
+      if (!forceRefresh && cached && Date.now() - cached.savedAt < freshFor) {
+        renderWeather(city, cached.current, cached.timezone);
+        renderCityMap(city, cached.coordinates);
+        return;
+      }
+      const controller = new AbortController();
+      weatherRequestController = controller;
+      $('#weather-condition').textContent = 'Loading local conditions…';
+      $('#weather-meta').textContent = 'Using the selected city only';
+      let coordinates = fallback;
+      try {
+        const geoParams = new URLSearchParams({ name: city + ', Odisha', count: '10', language: 'en', format: 'json' });
+        const geoResponse = await fetch('https://geocoding-api.open-meteo.com/v1/search?' + geoParams.toString(), { signal: controller.signal });
+        if (geoResponse.ok) {
+          const geoData = await geoResponse.json();
+          const results = Array.isArray(geoData.results) ? geoData.results : [];
+          const selected = results.find(function (item) { return item.country_code === 'IN' && /odisha/i.test((item.admin1 || '') + ' ' + (item.admin2 || '')); }) || results.find(function (item) { return item.country_code === 'IN'; });
+          if (selected && Number.isFinite(Number(selected.latitude)) && Number.isFinite(Number(selected.longitude))) {
+            coordinates = { latitude: Number(selected.latitude), longitude: Number(selected.longitude) };
+          }
+        }
+        renderCityMap(city, coordinates);
+        const weatherParams = new URLSearchParams({
+          latitude: String(coordinates.latitude), longitude: String(coordinates.longitude),
+          current: 'temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day', timezone: 'auto'
+        });
+        const weatherResponse = await fetch('https://api.open-meteo.com/v1/forecast?' + weatherParams.toString(), { signal: controller.signal });
+        if (!weatherResponse.ok) throw new Error('Weather service unavailable');
+        const weatherData = await weatherResponse.json();
+        if (requestId !== weatherRequestId) return;
+        if (!weatherData.current || !Number.isFinite(Number(weatherData.current.temperature_2m))) throw new Error('Weather response is incomplete');
+        weatherCache.set(city, { current: weatherData.current, timezone: weatherData.timezone, coordinates: coordinates, savedAt: Date.now() });
+        renderWeather(city, weatherData.current, weatherData.timezone);
+      } catch (error) {
+        if (error.name === 'AbortError' || requestId !== weatherRequestId) return;
+        $('#weather-city').textContent = city;
+        $('#weather-icon').textContent = '🌤️';
+        $('#weather-temperature').textContent = '—';
+        $('#weather-condition').textContent = 'Weather unavailable right now';
+        $('#weather-meta').textContent = 'The guide and maps still work.';
+        $('#weather-card').dataset.weather = 'sunny';
+        $('.hero').style.setProperty('--weather-glow', 'rgba(255,208,142,.22)');
+        renderCityMap(city, coordinates);
+      }
     }
     function mapsSearchUrl(query) {
       const place = $('#location-select').value;
@@ -1165,7 +1307,8 @@
     });
     $('#voice-button').addEventListener('click', startVoiceSearch);
     $('#language-select').addEventListener('change', function () { applyLanguage(this.value); });
-    $('#location-select').addEventListener('change', function () { updatePlaceGreeting(); renderOfficePreview(); if (activeServiceId) renderDetail(activeServiceId); });
+    $('#location-select').addEventListener('change', function () { updatePlaceGreeting(); renderOfficePreview(); loadCityApis(false); if (activeServiceId) renderDetail(activeServiceId); });
+    $('#weather-refresh').addEventListener('click', function () { loadCityApis(true); });
     $('#sos-open').addEventListener('click', openSosModal);
     $('#sos-close').addEventListener('click', closeSosModal);
     $('#sos-modal').addEventListener('click', function (event) { if (event.target === this) closeSosModal(); });
@@ -1190,6 +1333,7 @@
     } catch (e) {}
     updatePlaceGreeting();
     renderOfficePreview();
+    loadCityApis(false);
   </script>
 </body>
 </html>
