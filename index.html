@@ -59,6 +59,9 @@
     .head-actions { display: flex; align-items: center; gap: 9px; }
     .lang-select { height: 39px; padding: 0 10px; border: 1px solid var(--line); border-radius: 11px; color: var(--ink); background: white; font-size: 12px; font-weight: 700; }
     .desk-link { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 13px; background: var(--soft); border: 1px solid #d9e7e1; color: var(--teal-dark); border-radius: 11px; font-size: 12px; font-weight: 800; text-decoration: none; }
+    .account-button { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 1px solid #cfe4da; border-radius: 11px; background: #f4faf6; color: var(--teal-dark); font-size: 11px; font-weight: 850; white-space: nowrap; }
+    .account-button:hover { background: #e7f4ed; }
+    .account-button[data-signed-in="true"] { background: #e8f4ef; }
     .count-badge { display: inline-grid; min-width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--teal); color: white; font-size: 10px; }
     .menu-button { display: none; border: 0; background: transparent; color: var(--navy); padding: 7px; }
 
@@ -398,6 +401,17 @@
     .field select, .field input { min-height: 42px; padding: 0 11px; border: 1px solid #dbe5df; border-radius: 10px; background: #fbfcfb; color: var(--ink); font-size: 12px; }
     .modal-hint { margin: 4px 0 15px; padding: 11px; border-radius: 10px; background: #fff4e6; color: #705a3b; font-size: 10px; line-height: 1.55; }
     .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+    .otp-demo-code { margin: 0 0 12px; padding: 11px; border: 1px dashed #d89b5b; border-radius: 11px; background: #fff8ed; color: #725735; font-size: 11px; line-height: 1.5; }
+    .otp-demo-code strong { display: inline-block; margin-left: 4px; color: var(--navy); font-size: 18px; letter-spacing: 3px; }
+    .otp-state { min-height: 18px; margin: 0 0 12px; color: var(--teal-dark); font-size: 10px; line-height: 1.5; }
+    .pincode-card { display: grid; grid-template-columns: minmax(200px,1fr) minmax(260px,1fr); align-items: center; gap: 18px; margin: 18px 0 5px; padding: 18px; border: 1px solid rgba(255,255,255,.2); border-radius: 16px; background: rgba(255,255,255,.08); }
+    .pincode-card h3 { margin: 0 0 4px; color: white; font-size: 14px; }
+    .pincode-card p { margin: 0; color: #c4d9d8; font-size: 10px; line-height: 1.55; }
+    .pincode-form { display: flex; gap: 7px; }
+    .pincode-form input { min-width: 0; flex: 1; height: 40px; padding: 0 11px; border: 1px solid #dbe5df; border-radius: 10px; color: var(--ink); font-size: 12px; }
+    .pincode-form button { flex: 0 0 auto; padding-inline: 12px; }
+    .pincode-result { grid-column: 1/-1; margin: -8px 0 0 !important; color: #f8e5ca !important; }
+    .pincode-result a { color: #ffe1b1; font-weight: 800; }
     .toast { position: fixed; z-index: 90; right: 20px; bottom: 20px; max-width: min(380px, calc(100vw - 40px)); padding: 12px 15px; transform: translateY(20px); opacity: 0; pointer-events: none; border-radius: 12px; background: var(--navy); color: white; box-shadow: 0 10px 35px rgba(0,0,0,.2); font-size: 11px; transition: opacity .2s, transform .2s; }
     .toast.show { transform: translateY(0); opacity: 1; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -424,6 +438,9 @@
       .head-actions { margin-left: auto; }
       .desk-link { height: 37px; padding: 0 9px; font-size: 0; }
       .desk-link .icon { width: 18px; height: 18px; }
+      .account-button { width: 38px; height: 37px; justify-content: center; padding: 0; font-size: 0; }
+      .account-button .account-label { display: none; }
+      .count-badge { display: none; }
       .lang-select { max-width: 91px; height: 37px; padding: 0 5px; font-size: 10px; }
       .hero { padding: 48px 0 42px; }
       .hero { background-position: right -310px bottom 0, center, center; background-size: auto 78%, auto, auto; }
@@ -436,6 +453,8 @@
       .demo-feed { width: fit-content; margin-top: 13px; }
       .office-grid { grid-template-columns: 1fr; }
       .city-map-card { grid-template-columns: 1fr; gap: 8px; }
+      .pincode-card { grid-template-columns: 1fr; }
+      .pincode-result { grid-column: auto; }
       .document-layout { grid-template-columns: 1fr; }
       .assistant-fab { width: 46px; height: 46px; justify-content: center; padding: 0; border-radius: 50%; }
       .assistant-fab > span:not(.assistant-spark), .sos-fab > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
@@ -478,6 +497,12 @@
     @media (prefers-reduced-motion: reduce) {
       *, *:before, *:after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
       .hero:before, .hero:after { transform: none !important; transition: none !important; }
+    }
+    @media (max-width: 430px) {
+      .head-inner { gap: 6px; }
+      .head-actions { gap: 5px; }
+      .lang-select { max-width: 75px; padding-inline: 4px; }
+      .brand-sub { letter-spacing: .7px; }
     }
     @media print {
       body.printing-checklist * { visibility: hidden !important; }
@@ -544,6 +569,7 @@
           <option value="or">ଓଡ଼ିଆ</option>
         </select>
         <a class="desk-link" href="#my-desk" aria-label="My desk, saved items"><svg class="icon sm"><use href="#i-bookmark"/></svg><span data-i18n="navDesk">My desk</span> <span id="saved-count" class="count-badge">0</span></a>
+        <button class="account-button" id="account-open" type="button" aria-haspopup="dialog"><span aria-hidden="true">✦</span><span class="account-label" id="account-label">Create account</span></button>
         <button class="menu-button" id="menu-button" aria-label="Open navigation" aria-expanded="false"><svg class="icon lg"><use href="#i-menu"/></svg></button>
       </div>
     </div>
@@ -555,7 +581,7 @@
         <div>
           <div class="eyebrow"><span class="eyebrow-mark"><svg class="icon sm"><use href="#i-check"/></svg></span><span data-i18n="heroBadge">A clearer path to public services</span></div>
           <div class="welcome-row">
-            <p class="welcome-greeting"><span id="hello-word">Namaskar</span>, <strong id="welcome-place">Bhubaneswar</strong>!</p>
+            <p class="welcome-greeting"><span id="hello-word">Namaskar</span>, <strong id="welcome-user">friend</strong>! Services near <strong id="welcome-place">Bhubaneswar</strong>.</p>
             <label class="place-picker"><svg class="icon sm"><use href="#i-pin"/></svg><span data-i18n="locationLabel">Location</span>
               <select id="location-select" aria-label="Choose your city">
                 <option value="Bhubaneswar">Bhubaneswar</option><option value="Cuttack">Cuttack</option><option value="Puri">Puri</option><option value="Sambalpur">Sambalpur</option><option value="Rourkela">Rourkela</option>
@@ -676,6 +702,11 @@
           <div class="city-map-copy"><div class="section-kicker">Explore the area</div><h3><span id="map-place-name">Bhubaneswar</span> map view</h3><p>This is an approximate city overview. Use a service desk’s Maps link above when you need directions to a specific office.</p><a class="button" id="city-map-link" href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer"><svg class="icon sm"><use href="#i-pin"/></svg>Open larger map</a></div>
           <div class="city-map-frame"><iframe id="city-map-frame" title="OpenStreetMap city overview" loading="lazy" referrerpolicy="no-referrer"></iframe></div>
         </div>
+        <div class="pincode-card">
+          <div><div class="section-kicker">Official directory lookup</div><h3>Find an area by PIN code</h3><p>Search the Government of India Open Data PIN directory when the optional API backend is connected.</p></div>
+          <form class="pincode-form" id="pincode-form"><label class="sr-only" for="pincode-input">Six digit PIN code</label><input id="pincode-input" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[0-9]{6}" placeholder="Enter 6 digit PIN" required><button class="button" type="submit">Find area</button></form>
+          <p class="pincode-result" id="pincode-result" aria-live="polite">Demo mode: use <a href="https://www.indiapost.gov.in/locate-postoffice" target="_blank" rel="noopener noreferrer">India Post’s official post office finder</a>.</p>
+        </div>
         <p class="map-attribution">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> · Open Database License (ODbL).</p>
         <p class="availability-note"><strong>Prototype status:</strong> these officer and queue values are simulated examples, not live availability. A real status feed would need an authorized department source and current office-level data. Use the office and map links as starting points; confirm the responsible counter before travelling.</p>
         <div class="source-note"><span>Official integration discovery:</span><a href="https://directory.apisetu.gov.in/" target="_blank" rel="noopener noreferrer">API Setu directory</a><a href="https://www.data.gov.in/" target="_blank" rel="noopener noreferrer">Open Government Data India</a><span>Source availability and access permissions vary by department.</span></div>
@@ -776,16 +807,30 @@
       </form>
     </section>
   </div>
+  <div id="account-modal" class="modal-backdrop hidden" role="presentation">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="account-title">
+      <div class="modal-head"><div><div class="section-kicker">Password-free sign up</div><h2 id="account-title">Create your GovEase account</h2><p>Verify your email with a one-time code.</p></div><button class="modal-close" type="button" id="account-close" aria-label="Close dialog">×</button></div>
+      <form id="account-form">
+        <div class="field"><label for="account-name">Your name</label><input id="account-name" maxlength="70" autocomplete="name" required placeholder="How should we greet you?"></div>
+        <div class="field"><label for="account-email">Email address</label><input id="account-email" type="email" maxlength="254" autocomplete="email" required placeholder="you@example.com"></div>
+        <div class="field hidden" id="otp-field"><label for="account-otp">6-digit verification code</label><input id="account-otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="Enter code from your email"></div>
+        <p class="otp-demo-code hidden" id="otp-demo-code"></p>
+        <p class="otp-state" id="otp-state" aria-live="polite">Use only an email you control. Never share an OTP with another person.</p>
+        <p class="modal-hint">When the backend is connected, the code is emailed and verification creates an account. On this public demo page, the code is simulated in this browser; no email is sent and no account is created.</p>
+        <div class="modal-actions"><button class="button hidden" type="button" id="otp-resend">Resend code</button><button class="button primary" type="submit" id="account-submit">Send demo code</button></div>
+      </form>
+    </section>
+  </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <button class="assistant-fab" id="assistant-open" type="button" aria-label="Ask GovEase AI service guide" title="Ask GovEase" aria-expanded="false" aria-controls="assistant-panel"><span class="assistant-spark" aria-hidden="true">✦</span><span>Ask GovEase</span></button>
   <section class="assistant-panel hidden" id="assistant-panel" aria-label="GovEase instant service guide">
-    <div class="assistant-head"><div><strong>GovEase AI guide</strong><small>Instant help from this prototype’s service guides</small></div><button type="button" id="assistant-close" aria-label="Close assistant">×</button></div>
+    <div class="assistant-head"><div><strong>GovEase AI guide</strong><small id="assistant-mode">Instant help from this prototype’s service guides</small></div><button type="button" id="assistant-close" aria-label="Close assistant">×</button></div>
     <div class="assistant-messages" id="assistant-messages" role="log" aria-live="polite" aria-relevant="additions">
       <div class="assistant-message">Hi! Tell me which service you need help with. I can suggest the next step, starter documents and official portal.</div>
     </div>
     <div class="assistant-prompts" aria-label="Suggested questions"><button type="button" data-assistant-prompt="Income certificate">Income certificate</button><button type="button" data-assistant-prompt="How do I track my application?">Track an application</button><button type="button" data-assistant-prompt="Help me get documents ready with DigiLocker">Get files ready</button><button type="button" data-assistant-prompt="I need help with a bribe demand">Bribe help</button></div>
     <form class="assistant-form" id="assistant-form"><label class="sr-only" for="assistant-question">Ask about a public service</label><input id="assistant-question" type="text" maxlength="280" autocomplete="off" placeholder="Ask about a public service…"><button type="submit" aria-label="Send question">➜</button></form>
-    <p class="assistant-privacy">Demo guide, not a live AI or government feed. Messages stay in this page and are not sent to a model. Don’t enter personal numbers or passwords.</p>
+    <p class="assistant-privacy" id="assistant-privacy">Demo guide, not a live AI or government feed. Messages stay in this page and are not sent to a model. Don’t enter personal numbers or passwords.</p>
   </section>
   <button class="sos-fab" id="sos-open" type="button" aria-haspopup="dialog"><svg class="icon sm"><use href="#i-shield"/></svg><span data-i18n="sosButton">Bribe SOS</span></button>
 
@@ -814,7 +859,17 @@
     </section>
   </div>
 
+  <script src="config.js"></script>
   <script>
+    const API_BASE = String(window.GOVEASE_API_BASE || '').replace(/\/$/, '');
+    let demoOtp = '';
+    let pendingAccountName = '';
+    let accountAccessToken = '';
+    let accountOtpSent = false;
+    if (API_BASE) {
+      document.querySelector('#assistant-mode').textContent = 'AI model guidance · verify official steps';
+      document.querySelector('#assistant-privacy').textContent = 'Live mode sends your question to the GovEase API and AI provider for an answer. Do not enter names, ID numbers, contact details, passwords, or OTPs. Check official portals for current rules.';
+    }
     const services = [
       { id: 'income', title: 'Income certificate', category: 'certificates', categoryLabel: 'Certificates', icon: 'i-file', desc: 'Find the Odisha application route and see common items to prepare.', portal: 'eDistrict Odisha', url: 'https://edistrict.odisha.gov.in/', keywords: 'income revenue scholarship salary', docs: ['Identity and residence proof, as requested by the service', 'Income evidence for relevant household sources', 'Any declaration or supporting record listed on the current portal'], steps: ['Check the latest eligibility and document list on eDistrict Odisha.', 'Apply through the official portal or ask an authorised service centre for help.', 'Keep the acknowledgement or reference number issued by the portal.', 'Use the official status option to follow up.'] },
       { id: 'ews', title: 'EWS certificate', category: 'certificates', categoryLabel: 'Certificates', icon: 'i-badge', desc: 'Review the official criteria and application route before you start.', portal: 'eDistrict Odisha', url: 'https://edistrict.odisha.gov.in/', keywords: 'economically weaker section asset income admission', docs: ['Identity and residence proof requested by the issuing authority', 'Income and asset records required for your case', 'Any family or category evidence specified in the current rules'], steps: ['Read the current EWS eligibility rules for the purpose you need.', 'Check the current eDistrict Odisha document list and service instructions.', 'Submit through the official route or an authorised service centre.', 'Save the official acknowledgement for status checks.'] },
@@ -1298,18 +1353,114 @@
       }
       return { text: 'I can help with certificates, land records, driving licences, birth registration, schemes, ration support and public grievances. Ask about one service or use the Document Helper for file preparation. The answers come from this prototype’s built-in guide, not a live government system.', action: { href: '#services', label: 'Browse all services' } };
     }
-    function sendAssistantQuestion(question) {
+    async function sendAssistantQuestion(question) {
       const clean = question.trim();
       if (!clean) return;
-      if (/\b(?:aadhaar|aadhar|otp|password|passcode|bank account|account number)\b/i.test(clean) || /\d{8,}/.test(clean)) {
+      if (/\b(?:aadhaar|aadhar|otp|password|passcode|bank account|account number)\b/i.test(clean) || /\d{8,}/.test(clean) || /\b[^\s@]+@[^\s@]+\.[^\s@]+\b/.test(clean)) {
         $('#assistant-question').value = '';
         appendAssistantMessage('assistant', 'For your safety, please ask without Aadhaar or other ID numbers, phone or account numbers, passwords, or OTPs. I only need the service name or the problem stage.');
         return;
       }
       appendAssistantMessage('user', clean);
       $('#assistant-question').value = '';
+      if (API_BASE) {
+        appendAssistantMessage('assistant', 'One moment — I’m checking the AI service guide…');
+        const messages = $('#assistant-messages');
+        const pending = messages.lastElementChild;
+        try {
+          const response = await fetch(API_BASE + '/api/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query: clean }) });
+          const payload = await response.json();
+          if (!response.ok) throw new Error(payload.detail || 'The AI guide could not answer right now.');
+          pending.textContent = payload.answer + '\n\nPlease confirm changing requirements on the official service website.';
+          const action = document.createElement('a');
+          action.className = 'assistant-action'; action.href = '#services'; action.textContent = 'Browse official service links';
+          pending.appendChild(action);
+          return;
+        } catch (error) {
+          pending.textContent = answerAssistantQuestion(clean).text + '\n\nThe live AI endpoint is unavailable, so this answer came from the built-in guide.';
+          return;
+        }
+      }
       const response = answerAssistantQuestion(clean);
-      appendAssistantMessage('assistant', response.text, response.action);
+      appendAssistantMessage('assistant', response.text + '\n\nDemo guide only. No live AI request was made.', response.action);
+    }
+    async function lookupPincode(pin) {
+      const result = $('#pincode-result');
+      result.textContent = API_BASE ? 'Searching the official PIN directory…' : 'The live directory needs the Python API connection. Open '; 
+      if (!API_BASE) {
+        const link = document.createElement('a'); link.href = 'https://www.indiapost.gov.in/locate-postoffice'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'India Post’s official post office finder';
+        result.appendChild(link); result.append(' for a current lookup.'); return;
+      }
+      try {
+        const response = await fetch(API_BASE + '/api/pincode?pin=' + encodeURIComponent(pin));
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.detail || 'The PIN directory could not be reached.');
+        result.replaceChildren();
+        if (!payload.records || !payload.records.length) { result.textContent = 'No matches were returned. Check the PIN code or use India Post’s official finder.'; return; }
+        result.append(document.createTextNode('Official directory matches: '));
+        payload.records.slice(0, 5).forEach(function (record, index) {
+          if (index) result.append(document.createTextNode(' · '));
+          result.append(document.createTextNode([record.office, record.district, record.state].filter(Boolean).join(', ')));
+        });
+        result.append(document.createTextNode(' · '));
+        const source = document.createElement('a'); source.href = 'https://www.data.gov.in/'; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = 'data.gov.in'; result.appendChild(source);
+      } catch (error) {
+        result.replaceChildren(document.createTextNode('Lookup unavailable: ' + error.message + ' Use '));
+        const link = document.createElement('a'); link.href = 'https://www.indiapost.gov.in/locate-postoffice'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'India Post’s official finder'; result.appendChild(link); result.append('.');
+      }
+    }
+    function openAccountModal() {
+      if (accountAccessToken || pendingAccountName) { showToast((pendingAccountName || 'Demo') + ' · ' + (accountAccessToken ? 'email verified for this session.' : 'demo only; no account was created.')); return; }
+      $('#account-modal').classList.remove('hidden'); $('#account-name').focus();
+    }
+    function setAccountOtpStage() {
+      accountOtpSent = true;
+      $('#otp-field').classList.remove('hidden'); $('#otp-resend').classList.remove('hidden');
+      $('#account-otp').required = true; $('#account-submit').textContent = 'Verify code'; $('#account-otp').focus();
+    }
+    async function requestAccountOtp() {
+      const name = $('#account-name').value.trim();
+      const email = $('#account-email').value.trim().toLowerCase();
+      if (!name || !$('#account-email').checkValidity()) { $('#account-form').reportValidity(); return; }
+      $('#account-submit').disabled = true; $('#otp-resend').disabled = true; $('#otp-state').textContent = API_BASE ? 'Sending your one-time code…' : 'Creating a one-time demo code…';
+      try {
+        if (API_BASE) {
+          const response = await fetch(API_BASE + '/api/auth/request-otp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, email: email }) });
+          const payload = await response.json();
+          if (!response.ok) throw new Error(payload.detail || 'Could not send the verification code.');
+          $('#otp-state').textContent = 'A code was sent to ' + email + '. It expires in 5 minutes.';
+          $('#otp-demo-code').classList.add('hidden');
+        } else {
+          const bytes = new Uint32Array(1); crypto.getRandomValues(bytes); demoOtp = String(bytes[0] % 1000000).padStart(6, '0');
+          $('#otp-demo-code').innerHTML = 'Demo only — not sent by email. Enter this browser-generated code: <strong>' + safeText(demoOtp) + '</strong>';
+          $('#otp-demo-code').classList.remove('hidden');
+          $('#otp-state').textContent = 'Demo code generated locally. It expires when you close or refresh this page.';
+        }
+        pendingAccountName = name; setAccountOtpStage();
+      } catch (error) { $('#otp-state').textContent = error.message; }
+      finally { $('#account-submit').disabled = false; $('#otp-resend').disabled = false; }
+    }
+    async function verifyAccountOtp() {
+      const email = $('#account-email').value.trim().toLowerCase(); const otp = $('#account-otp').value.trim();
+      if (!/^\d{6}$/.test(otp)) { $('#account-otp').setCustomValidity('Enter the 6-digit code.'); $('#account-otp').reportValidity(); $('#account-otp').setCustomValidity(''); return; }
+      $('#account-submit').disabled = true; $('#otp-state').textContent = 'Checking your code…';
+      try {
+        if (API_BASE) {
+          const response = await fetch(API_BASE + '/api/auth/verify-otp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: pendingAccountName, email: email, otp: otp }) });
+          const payload = await response.json(); if (!response.ok) throw new Error(payload.detail || 'That code could not be verified.');
+          accountAccessToken = payload.access_token; pendingAccountName = payload.name;
+          $('#otp-state').textContent = 'Email verified. Your account is ready for this session.';
+          $('#account-label').textContent = payload.name.split(/\s+/)[0]; $('#account-open').dataset.signedIn = 'true';
+          $('#welcome-user').textContent = payload.name.split(/\s+/)[0];
+        } else {
+          if (otp !== demoOtp) throw new Error('That demo code does not match. Try the code shown above.');
+          $('#otp-state').textContent = 'Demo completed. This browser checked the code; no email was verified and no account was created.';
+          $('#account-label').textContent = 'Demo only'; $('#account-open').dataset.signedIn = 'true';
+          $('#welcome-user').textContent = pendingAccountName.split(/\s+/)[0];
+        }
+        setTimeout(function () { $('#account-modal').classList.add('hidden'); }, 1100);
+      } catch (error) { $('#otp-state').textContent = error.message; }
+      finally { $('#account-submit').disabled = false; }
     }
     function updateChecklistProgress() {
       const service = serviceById(activeServiceId);
@@ -1582,9 +1733,20 @@
     $('#modal-close').addEventListener('click', closePlanModal);
     $('#modal-cancel').addEventListener('click', closePlanModal);
     $('#visit-modal').addEventListener('click', function (event) { if (event.target === this) closePlanModal(); });
+    $('#account-open').addEventListener('click', openAccountModal);
+    $('#account-close').addEventListener('click', function () { $('#account-modal').classList.add('hidden'); });
+    $('#account-modal').addEventListener('click', function (event) { if (event.target === this) this.classList.add('hidden'); });
+    $('#account-form').addEventListener('submit', function (event) { event.preventDefault(); if (accountOtpSent) verifyAccountOtp(); else requestAccountOtp(); });
+    $('#otp-resend').addEventListener('click', requestAccountOtp);
+    $('#account-otp').addEventListener('input', function () { this.value = this.value.replace(/\D/g, '').slice(0, 6); });
+    $('#pincode-form').addEventListener('submit', function (event) {
+      event.preventDefault(); const pin = $('#pincode-input').value.trim();
+      if (!/^\d{6}$/.test(pin)) { $('#pincode-input').reportValidity(); return; }
+      lookupPincode(pin);
+    });
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') {
-        closePlanModal(); closeSosModal();
+        closePlanModal(); closeSosModal(); $('#account-modal').classList.add('hidden');
         $('#assistant-panel').classList.add('hidden');
         $('#assistant-open').setAttribute('aria-expanded', 'false');
       }
@@ -1623,3 +1785,4 @@
   </script>
 </body>
 </html>
+
