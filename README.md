@@ -16,14 +16,14 @@ GovEase is not affiliated with a government department. Officer/queue status is 
 
 ## Run the static website
 
-Open `outputs/govease-ai-citizen-services.html`, or serve the `outputs` folder from a local static server. `outputs/config.js` has an empty API base by default, so the demo stays self-contained.
+GitHub Pages serves `index.html` and `config.js` from the repository root. In the local workspace, open `outputs/govease-ai-citizen-services.html` or serve the `outputs` folder. The matching `config.js` has an empty API base by default, so the demo stays self-contained.
 
 ## Configure the Python API
 
 1. Install Python 3.10 or newer. From `backend/`, create a virtual environment and install `requirements.txt`.
 2. Copy `.env.example` to `.env`; fill in a server-side OpenAI API key, SMTP mail relay details, a random `GOVEASE_OTP_SECRET` of 32 or more characters, and the data.gov.in API key and resource UUID for the All India PIN Code Directory.
 3. Start the service with `uvicorn main:app --host 0.0.0.0 --port 8000` from `backend/`.
-4. Set `window.GOVEASE_API_BASE` in `outputs/config.js` to the HTTPS origin of the deployed API, then publish the static site again.
+4. Set `window.GOVEASE_API_BASE` in the `config.js` beside the website file to the HTTPS origin of the deployed API, then publish the static site again.
 5. Allow only the static website origin in `GOVEASE_CORS_ORIGINS`. Use HTTPS and a persistent volume for `GOVEASE_DATABASE_PATH`; otherwise accounts and sessions can be lost if the host replaces its filesystem.
 
 Never place API keys, SMTP passwords, or the OTP secret in `config.js`, HTML, JavaScript, or a public repository. Keep the real `.env` out of version control. The API does not provide an officer-availability integration because no authorized live department feed is configured.
