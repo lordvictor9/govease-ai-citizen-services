@@ -56,6 +56,7 @@
     .main-nav { display: flex; align-items: center; gap: 26px; }
     .main-nav a { color: #536a77; font-size: 13px; font-weight: 700; text-decoration: none; }
     .main-nav a:hover { color: var(--teal); }
+    .mobile-desk-link { display: none; }
     .head-actions { display: flex; align-items: center; gap: 9px; }
     .lang-select { height: 39px; padding: 0 10px; border: 1px solid var(--line); border-radius: 11px; color: var(--ink); background: white; font-size: 12px; font-weight: 700; }
     .desk-link { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 13px; background: var(--soft); border: 1px solid #d9e7e1; color: var(--teal-dark); border-radius: 11px; font-size: 12px; font-weight: 800; text-decoration: none; }
@@ -503,6 +504,8 @@
       .head-actions { gap: 5px; }
       .lang-select { max-width: 75px; padding-inline: 4px; }
       .brand-sub { letter-spacing: .7px; }
+      .desk-link { display: none; }
+      .mobile-desk-link { display: block; }
     }
     @media print {
       body.printing-checklist * { visibility: hidden !important; }
@@ -560,6 +563,7 @@
         <a href="#schemes" data-i18n="navSchemes">Schemes</a>
         <a href="#portals" data-i18n="navPortals">Official portals</a>
         <a href="#help" data-i18n="navHelp">Help</a>
+        <a class="mobile-desk-link" href="#my-desk">My desk</a>
       </nav>
       <div class="head-actions">
         <label class="sr-only" for="language-select">Choose language</label>
