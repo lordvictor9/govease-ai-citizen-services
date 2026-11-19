@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import json
 import os
 import re
 import secrets
@@ -225,7 +226,6 @@ def pincode(pin: str = Query(pattern=r"^\d{6}$")) -> dict[str, object]:
     try:
         request = Request(url, headers={"Accept": "application/json", "User-Agent": "GovEase-Citizen-Guide/1.0"})
         with urlopen(request, timeout=12) as response:
-            import json
             payload = json.loads(response.read(1_000_000).decode("utf-8"))
     except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
         raise HTTPException(status_code=502, detail="The official PIN directory is temporarily unavailable.") from exc
@@ -276,7 +276,7 @@ def verify_otp(request: OTPVerifyRequest) -> dict[str, str]:
     now = int(time.time())
     with _database() as connection:
         challenge = connection.execute("SELECT * FROM otp_challenges WHERE email = ?", (email,)).fetchone()
-        if not challenge or challenge["expires_at"] < now:
+        if not challenge or challenge["expires_at"] <= now:
             raise HTTPException(status_code=400, detail="That code expired. Request a new one.")
         if challenge["attempts"] >= 5:
             connection.execute("DELETE FROM otp_challenges WHERE email = ?", (email,))
